@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Alumni Reunion Registration</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Lato:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #1a1a2e;
+      font-family: 'Lato', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 30px 15px;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 12px;
+      overflow: hidden;
+      max-width: 580px;
+      width: 100%;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+
+    .banner {
+      position: relative;
+      width: 100%;
+      height: 280px;
+      overflow: hidden;
+    }
+
+    .banner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 10%;
+      display: block;
+    }
+
+    .banner-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(26,26,46,0.78) 0%, rgba(26,26,46,0.3) 52%, rgba(26,26,46,0.0) 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 20px 30px;
+      width: 52%;
+    }
+
+    .banner-overlay h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      color: #fff;
+      text-align: left;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.7);
+      margin-bottom: 6px;
+    }
+
+    .banner-overlay p {
+      color: #f0d890;
+      font-size: 12px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+    }
+
+    .form-body { padding: 30px 36px 36px; }
+
+    .divider {
+      border: none;
+      border-top: 2px solid #c9a84c;
+      margin-bottom: 24px;
+    }
+
+    .row { display: flex; gap: 16px; }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 16px;
+      flex: 1;
+    }
+
+    label {
+      font-size: 13px;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="number"],
+    textarea,
+    select {
+      border: 1.5px solid #ccc;
+      border-radius: 7px;
+      padding: 10px 12px;
+      font-size: 14px;
+      font-family: 'Lato', sans-serif;
+      color: #333;
+      background: #f9f9f9;
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: #c9a84c;
+      background: #fff;
+    }
+
+    input.error, textarea.error, select.error { border-color: #e74c3c; }
+
+    .error-msg {
+      color: #e74c3c;
+      font-size: 12px;
+      margin-top: 4px;
+      display: none;
+    }
+    .error-msg.show { display: block; }
+
+    .radio-group { display: flex; gap: 20px; margin-top: 4px; }
+    .radio-group label { font-weight: 400; display: flex; align-items: center; gap: 6px; cursor: pointer; }
+
+    .checkbox-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 4px; }
+    .checkbox-grid label { font-weight: 400; display: flex; align-items: center; gap: 6px; cursor: pointer; }
+
+    input[type="checkbox"], input[type="radio"] {
+      accent-color: #c9a84c; width: 15px; height: 15px; cursor: pointer;
+    }
+
+    textarea { resize: vertical; min-height: 80px; }
+
+    .donate-row { display: flex; align-items: center; gap: 10px; margin-bottom: 22px; }
+    .donate-row label { font-weight: 400; font-size: 14px; cursor: pointer; }
+
+    button[type="submit"] {
+      width: 100%;
+      background: #c9a84c;
+      color: #fff;
+      border: none;
+      padding: 13px;
+      font-size: 16px;
+      font-weight: 700;
+      font-family: 'Lato', sans-serif;
+      border-radius: 8px;
+      cursor: pointer;
+      letter-spacing: 1px;
+      transition: background 0.2s, transform 0.1s;
+    }
+    button[type="submit"]:hover { background: #b8922e; }
+    button[type="submit"]:active { transform: scale(0.98); }
+
+    #success-msg {
+      display: none;
+      text-align: center;
+      padding: 40px 20px;
+    }
+    #success-msg .check { font-size: 64px; margin-bottom: 14px; }
+    #success-msg h2 {
+      font-family: 'Playfair Display', serif;
+      color: #1a1a2e;
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+    #success-msg p { color: #555; font-size: 14px; line-height: 1.6; }
+  </style>
+</head>
+<body>
+
+<div class="card">
+
+  <div class="banner">
+    <img id="bannerImg" src="AlumniParty.png" alt="Alumni Celebration Dinner 2026"/>
+    <div class="banner-overlay">
+      <h1>Alumni Reunion Event</h1>
+      <p>Celebration Dinner 2026</p>
+    </div>
+  </div>
+
+  <div class="form-body">
+    <div id="form-section">
+      <hr class="divider"/>
+
+      <div class="row">
+        <div class="field">
+          <label for="fullname">Full Name *</label>
+          <input type="text" id="fullname" placeholder="John Doe"/>
+          <span class="error-msg" id="fullname-err">Please enter your full name.</span>
+        </div>
+        <div class="field">
+          <label for="grad-year">Graduation Year *</label>
+          <input type="number" id="grad-year" placeholder="e.g. 2020" min="1950" max="2025"/>
+          <span class="error-msg" id="grad-year-err">Enter a valid year (1950–2025).</span>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label for="email">Email Address *</label>
+          <input type="email" id="email" placeholder="you@example.com"/>
+          <span class="error-msg" id="email-err">Enter a valid email address.</span>
+        </div>
+        <div class="field">
+          <label for="phone">Contact Number *</label>
+          <input type="tel" id="phone" placeholder="+92 300 1234567"/>
+          <span class="error-msg" id="phone-err">Enter a valid phone number.</span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Will you be attending the event? *</label>
+        <div class="radio-group">
+          <label><input type="radio" name="attending" value="yes"/> Yes</label>
+          <label><input type="radio" name="attending" value="no"/> No</label>
+        </div>
+        <span class="error-msg" id="attending-err">Please select an option.</span>
+      </div>
+
+      <div class="field">
+        <label for="guests">Number of Guests</label>
+        <input type="number" id="guests" placeholder="0" min="0" max="10"/>
+        <span class="error-msg" id="guests-err">Enter a number between 0 and 10.</span>
+      </div>
+
+      <div class="field">
+        <label>Activities you'd like to participate in:</label>
+        <div class="checkbox-grid">
+          <label><input type="checkbox" value="networking"/> Networking Session</label>
+          <label><input type="checkbox" value="panel"/> Panel Discussion</label>
+          <label><input type="checkbox" value="workshops"/> Workshops</label>
+          <label><input type="checkbox" value="awards"/> Alumni Awards Ceremony</label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="comments">Additional Comments or Special Requests</label>
+        <textarea id="comments" placeholder="Any dietary requirements, accessibility needs, etc."></textarea>
+      </div>
+
+      <div class="donate-row">
+        <input type="checkbox" id="donate"/>
+        <label for="donate">I would like to make a donation to support the event.</label>
+      </div>
+
+      <button type="submit" onclick="submitForm()">REGISTER NOW</button>
+    </div>
+
+    <div id="success-msg">
+      <div class="check">🎉</div>
+      <h2>You're Registered!</h2>
+      <p>Thank you for registering for the Alumni Reunion Event.<br/>We look forward to seeing you there!</p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+
+  
+  function showError(inputId, errId) {
+    document.getElementById(inputId).classList.add('error');
+    document.getElementById(errId).classList.add('show');
+  }
+  function clearError(inputId, errId) {
+    document.getElementById(inputId).classList.remove('error');
+    document.getElementById(errId).classList.remove('show');
+  }
+
+  function submitForm() {
+    let valid = true;
+
+    const name = document.getElementById('fullname').value.trim();
+    if (name.length < 2) { showError('fullname','fullname-err'); valid=false; }
+    else clearError('fullname','fullname-err');
+
+    const year = parseInt(document.getElementById('grad-year').value);
+    if (isNaN(year) || year < 1950 || year > 2025) { showError('grad-year','grad-year-err'); valid=false; }
+    else clearError('grad-year','grad-year-err');
+
+    const email = document.getElementById('email').value.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showError('email','email-err'); valid=false; }
+    else clearError('email','email-err');
+
+    const phone = document.getElementById('phone').value.trim();
+    if (!/^[\d\s\+\-\(\)]{7,15}$/.test(phone)) { showError('phone','phone-err'); valid=false; }
+    else clearError('phone','phone-err');
+
+    const attending = document.querySelector('input[name="attending"]:checked');
+    if (!attending) { document.getElementById('attending-err').classList.add('show'); valid=false; }
+    else document.getElementById('attending-err').classList.remove('show');
+
+    if (attending && attending.value === 'yes') {
+      const guests = document.getElementById('guests').value;
+      if (guests !== '' && (parseInt(guests) < 0 || parseInt(guests) > 10)) { showError('guests','guests-err'); valid=false; }
+      else clearError('guests','guests-err');
+    }
+
+    if (valid) {
+      document.getElementById('form-section').style.display = 'none';
+      document.getElementById('success-msg').style.display = 'block';
+    }
+  }
+</script>
+
+</body>
+</html>
