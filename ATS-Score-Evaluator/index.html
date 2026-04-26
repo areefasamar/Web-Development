@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ResumeScore — ATS Resume Analyser</title>
+  <meta name="description" content="Upload your resume and get an instant ATS compatibility score with detailed feedback across 7 key sections. Free, instant, no login required." />
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+<div id="app">
+
+  <!-- Header -->
+  <header>
+    <div class="logo">
+      <span class="logo-icon">⊕</span>
+      <span class="logo-text">ResumeScore</span>
+    </div>
+    <span class="nav-badge">ATS Analyser</span>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <span class="hero-eyebrow">Free · Instant · No login</span>
+    <h1>Find out if your resume<br>passes the <span>ATS filter</span></h1>
+    <p>Upload your CV and get a detailed compatibility score across 7 key sections — before recruiters ever see it.</p>
+  </section>
+
+  <!-- Upload pill (Airbnb search bar style) -->
+  <section class="upload-section">
+    <div class="upload-pill" id="uploadPill" role="button" tabindex="0" aria-label="Upload your resume PDF">
+      <div class="pill-section" id="pillWhere">
+        <div class="pill-label">Resume</div>
+        <div class="pill-value" id="pillFileName">Upload your PDF</div>
+      </div>
+      <div class="pill-section">
+        <div class="pill-label">Format</div>
+        <div class="pill-value">PDF only · Max 20 MB</div>
+      </div>
+      <div class="pill-section">
+        <div class="pill-label">Results</div>
+        <div class="pill-value">7 section scores</div>
+      </div>
+      <button class="pill-btn" id="pillBtn" aria-label="Browse for file">🔍</button>
+    </div>
+    <input type="file" id="fileInput" accept=".pdf" aria-label="Upload PDF resume" />
+
+    <!-- File chip -->
+    <div class="file-chip" id="fileChip">
+      <div class="file-chip-icon">📄</div>
+      <span class="file-chip-name" id="fileName">resume.pdf</span>
+      <span class="file-chip-size" id="fileSize">0 KB</span>
+      <button class="btn-remove" id="btnRemove" aria-label="Remove file">✕</button>
+    </div>
+  </section>
+
+  <!-- Analyse CTA -->
+  <div class="cta-row">
+    <button id="btnAnalyse" disabled aria-label="Analyse my resume">
+      <span class="btn-spinner" aria-hidden="true"></span>
+      <span class="btn-text">Analyse my resume</span>
+    </button>
+  </div>
+
+  <!-- Progress -->
+  <div class="progress-wrap" id="progressWrap">
+    <div class="progress-label">
+      <span id="progressLabel">Extracting text…</span>
+      <span id="progressPct">0%</span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+  </div>
+
+  <!-- Results -->
+  <section id="results" aria-live="polite">
+
+    <div class="divider"></div>
+
+    <!-- Score card -->
+    <div class="section-heading">
+      <h2>Your ATS Report</h2>
+      <span id="resultDate"></span>
+    </div>
+
+    <div class="score-card">
+      <div class="score-ring-wrap">
+        <div class="score-ring" aria-label="Overall ATS score">
+          <svg viewBox="0 0 140 140">
+            <circle class="ring-track" cx="70" cy="70" r="65"/>
+            <circle class="ring-fill"  id="scoreArc" cx="70" cy="70" r="65"/>
+          </svg>
+          <div class="ring-center">
+            <span class="ring-score" id="scoreNumber">0</span>
+            <span class="ring-label">/ 100</span>
+          </div>
+        </div>
+        <div class="score-badge" id="scoreGrade"></div>
+      </div>
+
+      <div class="score-info">
+        <h2 id="resultHeadline">Awaiting analysis</h2>
+        <p id="resultSummary">Upload a resume above to see your full ATS compatibility report.</p>
+        <div class="meta-pills" id="metaPills"></div>
+      </div>
+    </div>
+
+    <!-- Chart + Bars -->
+    <div class="results-grid">
+      <div class="card">
+        <div class="card-label">Section breakdown</div>
+        <div class="chart-wrap">
+          <canvas id="radarChart" width="300" height="300" aria-label="Section scores radar chart"></canvas>
+        </div>
+      </div>
+
+      <div class="card" id="barScores">
+        <div class="card-label">Score by section</div>
+      </div>
+    </div>
+
+    <!-- Section cards -->
+    <div class="section-heading">
+      <h2>Section Details</h2>
+    </div>
+    <div class="sections-grid" id="sectionCards"></div>
+
+    <!-- Preview -->
+    <div class="preview-section">
+      <button class="preview-toggle" id="previewToggle" aria-expanded="false">
+        <span>Extracted Resume Text</span>
+        <span class="preview-arrow" aria-hidden="true">▼</span>
+      </button>
+      <div class="preview-body" id="previewBody">
+        <pre class="preview-text" id="previewText"></pre>
+      </div>
+    </div>
+
+  </section>
+
+  <div class="toast" id="toast" role="alert" aria-live="assertive"></div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
