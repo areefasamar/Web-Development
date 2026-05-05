@@ -1,20 +1,32 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+⚡ VibeCheck: A Neobrutalist Streetwear E-Commerce Experience
+VibeCheck is a high-energy, AI-integrated e-commerce platform that breaks the "minimalist" norm. Built during GDG Kolachi's Build with AI Workshop 03, this project focuses on Vibe Coding—moving from a Gen-Z aesthetic concept to a fully functional full-stack deployment in record time.
 
-# Run and deploy your AI Studio app
+🚀 Live Demo
+Live Web App: [Click Here](https://vibecheck-store.vercel.app/)
 
-This contains everything you need to run your app locally.
+🎨 The Concept: Breaking the Norm
+While most modern e-commerce apps are clean and minimalist, VibeCheck is designed for the Gen-Z vibe. It utilizes a Neobrutalist design language featuring:
 
-View your app in AI Studio: https://ai.studio/apps/0a493b4d-38b8-4ccb-ab51-18893403da9b
+High-contrast black borders and heavy shadows.
 
-## Run Locally
+Reactive neon color palettes (Lime, Cyan, Violet).
 
-**Prerequisites:**  Node.js
+Bento-grid layouts that prioritize energy over "empty space."
 
+🤖 AI-Powered "Neural" Features
+Controlled by the Gemini 3 Flash model, the app goes beyond simple shopping:
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+Vibe Analysis: Upload a garment image, and the AI identifies the type, writes a luxury description, and suggests pricing.
+
+Neural Audit: An inventory intelligence engine that scans stock levels and generates trendy restock strategies.
+
+🛠️ Tech Stack & Architecture
+Generation: Built using Google AI Studio for rapid prototyping and design fetching.
+
+Frontend: React with high-energy CSS and Recharts for data visualization.
+
+AI Integration: Gemini 3 Flash API for automated product management.
+
+Persistence: Hybrid Local Storage with an Auto-Compression Engine to handle high-res images locally.
+
+Deployment: Deployed via Vercel for high-speed delivery.
