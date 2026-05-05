@@ -4,7 +4,7 @@ This project is an AI-powered Applicant Tracking System (ATS) Evaluator designed
 ## 🚀 Live Demo & Video
 Live Web App: [Click here](https://atsscoreevaluator.netlify.app/)
 
-## 🚀 The Problem
+## ⚠️ The Problem
 Most job seekers struggle to pass initial ATS filters because their resumes lack the specific keywords or formatting required by automated systems. This tool provides an "insider look" at how a resume measures up against a job post before the user ever hits "Apply."
 
 ## ✨ Key Features
