@@ -1,0 +1,103 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Epilogue:wght@100..900&display=swap');
+
+@theme {
+  --font-sans: "Epilogue", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Epilogue", sans-serif;
+  
+  --color-neon-lime: #abd600;
+  --color-neon-cyan: #00f0ff;
+  --color-neon-violet: #a855f7;
+  --color-neon-orange: #fbbf24;
+  
+  --shadow-hard-sm: 4px 4px 0px 0px #000;
+  --shadow-hard-md: 6px 6px 0px 0px #000;
+  --shadow-hard-lg: 10px 10px 0px 0px #000;
+}
+
+@layer base {
+  body {
+    @apply bg-white text-black font-sans antialiased overflow-x-hidden;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-black uppercase tracking-tighter;
+  }
+}
+
+@layer utilities {
+  .neo-border {
+    border-width: 3px;
+    border-color: black;
+  }
+
+  .neo-button {
+    border-width: 3px;
+    border-color: black;
+    padding: 0.75rem 1.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    transition-property: all;
+    background-color: white;
+    cursor: pointer;
+    
+    &:hover {
+      background-color: var(--color-neon-lime);
+    }
+    
+    &:active {
+      transform: translate(2px, 2px);
+      box-shadow: none;
+    }
+  }
+
+  .neo-card {
+    border-width: 3px;
+    border-color: black;
+    background-color: white;
+    box-shadow: var(--shadow-hard-sm);
+    transition-property: all;
+    
+    &:hover {
+      box-shadow: var(--shadow-hard-md);
+    }
+  }
+
+  .marquee {
+    white-space: nowrap;
+    overflow: hidden;
+    display: flex;
+  }
+
+  .marquee-content {
+    display: flex;
+    animation: scroll 20s linear infinite;
+  }
+}
+
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.violet-pulse {
+  box-shadow: 0 0 0 0 rgba(168, 85, 247, 0.7);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(168, 85, 247, 0.7); }
+  70% { box-shadow: 0 0 0 20px rgba(168, 85, 247, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(168, 85, 247, 0); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+.animate-shake {
+  animation: shake 0.2s ease-in-out 2;
+}
