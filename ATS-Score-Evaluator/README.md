@@ -31,3 +31,4 @@ Paste: Add the Job Description you are targeting.
 Analyze: The AI compares the two, looking for overlaps in tech stacks, certifications, and responsibilities.
 
 Improve: Receive a detailed report with a score and a list of "Missing Keywords" to add.
+
