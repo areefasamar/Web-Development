@@ -1,1 +1,1 @@
-https://darling-griffin-f8cc4d.netlify.app/
+https://atsscoreevaluator.netlify.app/
