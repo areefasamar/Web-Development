@@ -1,2 +1,2 @@
-RXClear: (Prescription Decoder)
+RXClear: (Prescription Decoder)  
 https://github.com/areefasamar/RxClear
